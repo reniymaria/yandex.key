@@ -32,7 +32,7 @@ public class MainTest {
     }
 
 
-   @Test
+  @Test
     public void checkTitleElementPresent() {
         driver.startActivity("ru.yandex.key", "ru.yandex.key.ui.activities.main.MainActivity"); // appPackage appActivity
         Boolean iselementpresent = driver.findElementsByName("Самое время добавить первый аккаунт").size() != 0;
@@ -63,6 +63,7 @@ public class MainTest {
         System.out.println("Message is present on screen.");
 
     }
+
 
     @Test
     public void checkSetting(){
