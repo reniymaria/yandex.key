@@ -1,3 +1,5 @@
+package test;
+
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -6,11 +8,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
+import utils.MyConfig;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+
 
 public class MainTest {
 
@@ -20,20 +23,14 @@ public class MainTest {
     public void setUp() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("app", "D:\\autotest\\yandexkey-android.apk");
-        capabilities.setCapability("deviceName", "android");
-       //capabilities.setCapability("browserName", "Android");
-       //capabilities.setCapability("platformVersion", "5.1.1");
-       //capabilities.setCapability("platformName", "Android");
-       //capabilities.setCapability("appPackage", "io.appium.android.apis");
-        //capabilities.setCapability("appActivity", "io.appium.android.apis.ApiDemos");
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
-        //driver.startActivity("ru.yandex.key", "ru.yandex.key.ui.activities.main.MainActivity"); // appPackage appActivity
+        capabilities.setCapability("deviceName", "BH90M6VD1L");
+        driver = new AndroidDriver(new URL(MyConfig.HUB), capabilities);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
 
   @Test
-    public void checkTitleElementPresent() {
+    public void titleElementPresent() {
         driver.startActivity("ru.yandex.key", "ru.yandex.key.ui.activities.main.MainActivity"); // appPackage appActivity
         Boolean iselementpresent = driver.findElementsByName("Самое время добавить первый аккаунт").size() != 0;
         Assert.assertTrue(iselementpresent, "Title is not present on screen");
@@ -42,7 +39,7 @@ public class MainTest {
 
 
     @Test
-    public void checkBtnElementPresent() {
+    public void btnElementPresent() {
         driver.startActivity("ru.yandex.key", "ru.yandex.key.ui.activities.main.MainActivity"); // appPackage appActivity
         Boolean iselementpresent = driver.findElementsById("ru.yandex.key:id/btn_add_account").size() != 0;
         Assert.assertTrue(iselementpresent,"Btn is not present");
@@ -50,7 +47,7 @@ public class MainTest {
     }
 
     @Test
-    public void checkAddAccount(){
+    public void addAccount(){
         driver.startActivity("ru.yandex.key", "ru.yandex.key.ui.activities.main.MainActivity");
         driver.findElement(By.id("ru.yandex.key:id/btn_add_account")).click();
         driver.findElement(By.id("ru.yandex.key:id/tv_add_account_manually")).click();
@@ -66,7 +63,7 @@ public class MainTest {
 
 
     @Test
-    public void checkSetting(){
+    public void nameOfSettingTitle(){
         driver.startActivity("ru.yandex.key", "ru.yandex.key.ui.activities.main.MainActivity");
         driver.findElement(By.id("ru.yandex.key:id/btn_add_account")).click();
         driver.findElement(By.id("ru.yandex.key:id/tv_add_account_manually")).click();
@@ -83,7 +80,7 @@ public class MainTest {
     }
 
     @AfterTest
-    public void End() throws IOException {
+    public void end() throws IOException {
         driver.quit();
     }
 }
