@@ -8,11 +8,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import utils.MyConfig;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 
 public class MainTest {
@@ -24,12 +22,12 @@ public class MainTest {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("app", "D:\\autotest\\yandexkey-android.apk");
         capabilities.setCapability("deviceName", "BH90M6VD1L");
-        driver = new AndroidDriver(new URL(MyConfig.HUB), capabilities);
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        //driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
-
-  @Test
+/*
+    @Test
     public void titleElementPresent() {
         driver.startActivity("ru.yandex.key", "ru.yandex.key.ui.activities.main.MainActivity"); // appPackage appActivity
         Boolean iselementpresent = driver.findElementsByName("Самое время добавить первый аккаунт").size() != 0;
@@ -45,11 +43,12 @@ public class MainTest {
         Assert.assertTrue(iselementpresent,"Btn is not present");
         System.out.println("Targeted element Loader is present on screen.");
     }
-
+*/
     @Test
     public void addAccount(){
         driver.startActivity("ru.yandex.key", "ru.yandex.key.ui.activities.main.MainActivity");
-        driver.findElement(By.id("ru.yandex.key:id/btn_add_account")).click();
+        //driver.findElement(By.id("ru.yandex.key:id/btn_add_account")).click();
+        driver.click
         driver.findElement(By.id("ru.yandex.key:id/tv_add_account_manually")).click();
         driver.findElement(By.name("Логин")).sendKeys("astanova1");
         WebElement enter = driver.findElement(By.name("Секретный ключ"));
@@ -61,7 +60,7 @@ public class MainTest {
 
     }
 
-
+/*
     @Test
     public void nameOfSettingTitle(){
         driver.startActivity("ru.yandex.key", "ru.yandex.key.ui.activities.main.MainActivity");
@@ -78,7 +77,7 @@ public class MainTest {
         System.out.println("Title is present");
 
     }
-
+*/
     @AfterTest
     public void end() throws IOException {
         driver.quit();
